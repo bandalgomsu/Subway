@@ -1,4 +1,4 @@
-package recommend.subway.webclient.service;
+package recommend.subway.infra.webclient.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,7 @@ public class ApiParser {
             int resultInt = result[i];
             resultList.add(resultInt);
         }
+        
         return resultList;
     }
 

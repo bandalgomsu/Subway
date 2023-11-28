@@ -1,4 +1,4 @@
-package recommend.subway.batch.reader;
+package recommend.subway.infra.batch.reader;
 
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -6,7 +6,7 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import recommend.subway.batch.dto.RateDTO;
+import recommend.subway.infra.batch.dto.RateDTO;
 
 @Configuration
 public class RateReader {

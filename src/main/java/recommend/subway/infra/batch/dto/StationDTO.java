@@ -1,4 +1,4 @@
-package recommend.subway.batch.dto;
+package recommend.subway.infra.batch.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package recommend.subway.webclient.config;
+package recommend.subway.infra.webclient.config;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;

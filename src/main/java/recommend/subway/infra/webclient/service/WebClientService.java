@@ -1,4 +1,4 @@
-package recommend.subway.webclient.service;
+package recommend.subway.infra.webclient.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +63,17 @@ public class WebClientService {
         return new Seats(seats);
     }
 
+    public Seats getSeatsByGetOff(Rates rates, Time time, UpDown upDown) {
+        List<Seat> seats = new ArrayList<>();
+
+        rates.getRates().forEach(
+                rate -> seats.add(new Seat(apiParser
+                        .parseGetOff(callGetOffApi(rate.getStation(), time).block(), time, upDown),
+                        rate.getStation().getName()))
+        );
+        return new Seats(seats);
+    }
+
     private Seat callApi(Station station, Time time, UpDown upDown) {
         String congestion = callCongestionApi(station, time).block();
         String getOff = callGetOffApi(station, time).block();
@@ -78,4 +89,5 @@ public class WebClientService {
                 .mapToObj(i -> congestion.get(i) - ((congestion.get(i) * getOff.get(i)) / 100))
                 .collect(Collectors.toList());
     }
+
 }

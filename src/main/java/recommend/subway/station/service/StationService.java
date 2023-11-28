@@ -1,10 +1,12 @@
 package recommend.subway.station.service;
 
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import recommend.subway.infra.webclient.service.WebClientService;
 import recommend.subway.station.domain.Rate;
 import recommend.subway.station.domain.Rates;
 import recommend.subway.station.domain.Seats;
@@ -15,11 +17,11 @@ import recommend.subway.station.domain.UpDown;
 import recommend.subway.station.dto.RecommendDTO;
 import recommend.subway.station.repository.RateRepository;
 import recommend.subway.station.repository.StationRepository;
-import recommend.subway.webclient.service.WebClientService;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
+@Transactional
 public class StationService {
     private final RateRepository rateRepository;
     private final StationRepository stationRepository;
@@ -30,12 +32,27 @@ public class StationService {
                 recommendDTO.getSubwayLine());
         Station end = stationRepository.findByNameAndSubwayLine(recommendDTO.getEnd(),
                 recommendDTO.getSubwayLine());
+
         UpDown upDown = start.computeUpDown(end);
         Time time = new Time(recommendDTO.getHour(), recommendDTO.getMinute());
 
         Rates rates = getRates(getRoute(start, end, upDown), time);
 
         return webClientService.getSeats(rates, time, upDown);
+    }
+
+    public Seats recommendSeatsByGetOff(RecommendDTO recommendDTO) {
+        Station start = stationRepository.findByNameAndSubwayLine(recommendDTO.getStart(),
+                recommendDTO.getSubwayLine());
+        Station end = stationRepository.findByNameAndSubwayLine(recommendDTO.getEnd(),
+                recommendDTO.getSubwayLine());
+
+        UpDown upDown = start.computeUpDown(end);
+        Time time = new Time(recommendDTO.getHour(), recommendDTO.getMinute());
+
+        Rates rates = getRates(getRoute(start, end, upDown), time);
+
+        return webClientService.getSeatsByGetOff(rates, time, upDown);
     }
 
     private Stations getRoute(Station start, Station end, UpDown upDown) {

@@ -1,4 +1,4 @@
-package recommend.subway.batch.dto;
+package recommend.subway.infra.batch.dto;
 
 import java.util.ArrayList;
 import java.util.List;

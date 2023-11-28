@@ -1,4 +1,4 @@
-package recommend.subway.batch.config;
+package recommend.subway.infra.batch.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -9,12 +9,12 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import recommend.subway.batch.dto.RateDTO;
-import recommend.subway.batch.dto.StationDTO;
-import recommend.subway.batch.reader.RateReader;
-import recommend.subway.batch.reader.StationReader;
-import recommend.subway.batch.writer.RateWriter;
-import recommend.subway.batch.writer.StationWriter;
+import recommend.subway.infra.batch.dto.RateDTO;
+import recommend.subway.infra.batch.dto.StationDTO;
+import recommend.subway.infra.batch.reader.RateReader;
+import recommend.subway.infra.batch.reader.StationReader;
+import recommend.subway.infra.batch.writer.RateWriter;
+import recommend.subway.infra.batch.writer.StationWriter;
 
 @RequiredArgsConstructor
 @Configuration

@@ -1,4 +1,4 @@
-package recommend.subway.batch.reader;
+package recommend.subway.infra.batch.reader;
 
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -6,7 +6,7 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import recommend.subway.batch.dto.StationDTO;
+import recommend.subway.infra.batch.dto.StationDTO;
 
 @Configuration
 public class StationReader {
@@ -24,7 +24,7 @@ public class StationReader {
 
             return new StationDTO(subwayLine, stationName, stationCode); //vo로 리턴
         });
-        
+
         FlatFileItemReader<StationDTO> reader = new FlatFileItemReaderBuilder<StationDTO>()
                 .name("csvItemReader")
                 .encoding("UTF-8")

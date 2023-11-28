@@ -11,4 +11,12 @@ public class RecommendResult {
         this.result = result;
         this.car = car;
     }
+
+    @Override
+    public String toString() {
+        return "RecommendResult{" +
+                "result=" + result +
+                ", car=" + car +
+                '}';
+    }
 }
