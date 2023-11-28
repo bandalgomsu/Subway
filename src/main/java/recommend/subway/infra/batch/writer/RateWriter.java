@@ -1,11 +1,11 @@
-package recommend.subway.batch.writer;
+package recommend.subway.infra.batch.writer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Configuration;
-import recommend.subway.batch.dto.RateDTO;
+import recommend.subway.infra.batch.dto.RateDTO;
 import recommend.subway.station.domain.Station;
 import recommend.subway.station.repository.RateRepository;
 import recommend.subway.station.repository.StationRepository;

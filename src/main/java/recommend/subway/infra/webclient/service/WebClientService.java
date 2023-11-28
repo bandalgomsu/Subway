@@ -1,4 +1,4 @@
-package recommend.subway.webclient.service;
+package recommend.subway.infra.webclient.service;
 
 import java.util.ArrayList;
 import java.util.List;
