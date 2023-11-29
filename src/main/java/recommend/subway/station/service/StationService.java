@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 import recommend.subway.infra.webclient.service.WebClientService;
 import recommend.subway.station.domain.Rate;
 import recommend.subway.station.domain.Rates;
+import recommend.subway.station.domain.Seat;
 import recommend.subway.station.domain.Seats;
 import recommend.subway.station.domain.Station;
 import recommend.subway.station.domain.Stations;
 import recommend.subway.station.domain.Time;
 import recommend.subway.station.domain.UpDown;
 import recommend.subway.station.dto.RecommendDTO;
+import recommend.subway.station.dto.TestDTO;
 import recommend.subway.station.repository.RateRepository;
 import recommend.subway.station.repository.StationRepository;
 
@@ -53,6 +55,16 @@ public class StationService {
         Rates rates = getRates(getRoute(start, end, upDown), time);
 
         return webClientService.getSeatsByGetOff(rates, time, upDown);
+    }
+
+    public Seat testGetSeats(TestDTO testDTO) {
+        Station station = stationRepository.findByNameAndSubwayLine(testDTO.getStart(), testDTO.getSubwayLine());
+
+        UpDown upDown = testDTO.getUpDown();
+
+        Time time = new Time(testDTO.getHour(), testDTO.getMinute());
+
+        return webClientService.testGetSeats(station, time, upDown);
     }
 
     private Stations getRoute(Station start, Station end, UpDown upDown) {

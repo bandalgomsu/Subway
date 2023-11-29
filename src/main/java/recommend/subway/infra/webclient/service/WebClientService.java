@@ -71,7 +71,12 @@ public class WebClientService {
                         .parseGetOff(callGetOffApi(rate.getStation(), time).block(), time, upDown),
                         rate.getStation().getName()))
         );
+
         return new Seats(seats);
+    }
+
+    public Seat testGetSeats(Station station, Time time, UpDown upDown) {
+        return callApi(station, time, upDown);
     }
 
     private Seat callApi(Station station, Time time, UpDown upDown) {
