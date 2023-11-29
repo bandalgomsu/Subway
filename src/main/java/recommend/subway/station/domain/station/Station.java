@@ -1,4 +1,4 @@
-package recommend.subway.station.domain;
+package recommend.subway.station.domain.station;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

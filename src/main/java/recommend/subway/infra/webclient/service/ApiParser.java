@@ -5,8 +5,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-import recommend.subway.station.domain.Time;
-import recommend.subway.station.domain.UpDown;
+import recommend.subway.station.domain.station.Time;
+import recommend.subway.station.domain.station.UpDown;
 
 @Service
 public class ApiParser {
@@ -47,7 +47,7 @@ public class ApiParser {
             int resultInt = result[i];
             resultList.add(resultInt);
         }
-        
+
         return resultList;
     }
 

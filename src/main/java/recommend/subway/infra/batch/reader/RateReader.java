@@ -20,7 +20,7 @@ public class RateReader {
                 "subwayLine", "stationName",
                 "_04", "_05", "_06", "_07", "_08", "_09", "_10", "_11", "_12", "_13"
                 , "_14", "_15", "_16", "_17", "_18", "_19", "_20", "_21", "_22", "_23"
-                , "_00", "_01", "_02", "_03"
+                , "_00", "_01", "_02", "_03", "month"
         );
 
         lineMapper.setLineTokenizer(tokenizer);
@@ -51,6 +51,7 @@ public class RateReader {
             int _21 = fieldSet.readInt("_21");
             int _22 = fieldSet.readInt("_22");
             int _23 = fieldSet.readInt("_23");
+            String month = fieldSet.readString("month");
 
             return RateDTO.builder()
                     .stationName(stationName)
@@ -59,6 +60,7 @@ public class RateReader {
                     ._07(_07)._08(_08)._09(_09)._10(_10)._11(_11)._12(_12)._13(_13)
                     ._14(_14)._15(_15)._16(_16)._17(_17)._18(_18)._19(_19)._20(_20)
                     ._21(_21)._22(_22)._23(_23)
+                    .month(month)
                     .build();
         });
 

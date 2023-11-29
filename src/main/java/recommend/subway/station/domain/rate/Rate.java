@@ -1,4 +1,4 @@
-package recommend.subway.station.domain;
+package recommend.subway.station.domain.rate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import recommend.subway.station.domain.station.Station;
 
 @Entity
 @AllArgsConstructor
@@ -26,6 +27,7 @@ public class Rate {
     private int rate;
 
     private String hour;
+    private String month;
 
     @ManyToOne
     @JoinColumn(name = "station_Id")

@@ -1,4 +1,4 @@
-package recommend.subway.station.domain;
+package recommend.subway.station.domain.station;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -5,8 +5,8 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import recommend.subway.station.domain.Rate;
-import recommend.subway.station.domain.Station;
+import recommend.subway.station.domain.rate.Rate;
+import recommend.subway.station.domain.station.Station;
 
 @Builder
 @AllArgsConstructor
@@ -38,6 +38,7 @@ public class RateDTO {
     private final int _21;
     private final int _22;
     private final int _23;
+    private final String month;
 
     public List<Rate> toEntity(Station station) {
         List<Rate> getInOutRates = new ArrayList<>();
@@ -47,6 +48,7 @@ public class RateDTO {
             getInOutRates.add(Rate.builder()
                     .rate(rates.get(i))
                     .hour(String.format("%02d", i))
+                    .month(this.month)
                     .station(station)
                     .build()
             );

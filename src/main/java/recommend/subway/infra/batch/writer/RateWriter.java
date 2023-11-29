@@ -1,12 +1,13 @@
 package recommend.subway.infra.batch.writer;
 
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Configuration;
 import recommend.subway.infra.batch.dto.RateDTO;
-import recommend.subway.station.domain.Station;
+import recommend.subway.station.domain.station.Station;
 import recommend.subway.station.repository.RateRepository;
 import recommend.subway.station.repository.StationRepository;
 
@@ -21,11 +22,31 @@ public class RateWriter implements ItemWriter<RateDTO> {
     public void write(Chunk<? extends RateDTO> chunk) {
         chunk.forEach(
                 item -> {
-                    Station station = stationRepository.findByNameAndSubwayLine(
-                            item.getStationName(), item.getSubwayLine());
-                    log.info(item.toEntity(station).toString());
-                    getInOutRateRepository.saveAll(item.toEntity(station));
+                    try {
+                        Station station = stationRepository.findByNameAndSubwayLine(
+                                validationName(item.getStationName()), item.getSubwayLine());
+                        getInOutRateRepository.saveAll(item.toEntity(station));
+                    } catch (Exception e) {
+                        log.info("item = {} {} ", item.getStationName(), item.getSubwayLine());
+                    }
                 }
         );
+    }
+
+    private String validationName(String name) {
+        if (name.contains("역")) {
+            return name;
+        }
+
+        if (name.contains("(")) {
+            String[] split = name.split("\\(", -1);
+            return Arrays.stream(split).findFirst().get() + "역";
+        }
+
+        return name + "역";
+    }
+
+    private String validationSubwayLine() {
+        return null;
     }
 }

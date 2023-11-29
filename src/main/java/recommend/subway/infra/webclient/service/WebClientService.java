@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import recommend.subway.station.domain.Rates;
-import recommend.subway.station.domain.Seat;
-import recommend.subway.station.domain.Seats;
-import recommend.subway.station.domain.Station;
-import recommend.subway.station.domain.Time;
-import recommend.subway.station.domain.UpDown;
+import recommend.subway.station.domain.rate.Rates;
+import recommend.subway.station.domain.seat.Seat;
+import recommend.subway.station.domain.seat.Seats;
+import recommend.subway.station.domain.station.Station;
+import recommend.subway.station.domain.station.Time;
+import recommend.subway.station.domain.station.UpDown;
 
 @Service
 @RequiredArgsConstructor
@@ -71,7 +71,12 @@ public class WebClientService {
                         .parseGetOff(callGetOffApi(rate.getStation(), time).block(), time, upDown),
                         rate.getStation().getName()))
         );
+
         return new Seats(seats);
+    }
+
+    public Seat testGetSeats(Station station, Time time, UpDown upDown) {
+        return callApi(station, time, upDown);
     }
 
     private Seat callApi(Station station, Time time, UpDown upDown) {
@@ -81,12 +86,28 @@ public class WebClientService {
         return new Seat(combineParseResult(congestion, getOff, time, upDown), station.getName());
     }
 
+    private Seat callApi1(Station station, Time time, UpDown upDown) {
+        String congestion = callCongestionApi(station, time).block();
+        String getOff = callGetOffApi(station, time).block();
+
+        return new Seat(combineParseResult1(congestion, getOff, time, upDown), station.getName());
+    }
+
     private List<Integer> combineParseResult(String congestionData, String getOffData, Time time, UpDown upDown) {
         List<Integer> congestion = apiParser.parseCongestion(congestionData, time, upDown);
         List<Integer> getOff = apiParser.parseGetOff(getOffData, time, upDown);
 
         return IntStream.range(0, getOff.size())
                 .mapToObj(i -> congestion.get(i) - ((congestion.get(i) * getOff.get(i)) / 100))
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> combineParseResult1(String congestionData, String getOffData, Time time, UpDown upDown) {
+        List<Integer> congestion = apiParser.parseCongestion(congestionData, time, upDown);
+        List<Integer> getOff = apiParser.parseGetOff(getOffData, time, upDown);
+
+        return IntStream.range(0, getOff.size())
+                .mapToObj(i -> ((congestion.get(i) * getOff.get(i))))
                 .collect(Collectors.toList());
     }
 

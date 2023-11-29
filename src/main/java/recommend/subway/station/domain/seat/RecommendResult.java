@@ -1,4 +1,4 @@
-package recommend.subway.station.domain;
+package recommend.subway.station.domain.seat;
 
 import lombok.Getter;
 
@@ -18,5 +18,9 @@ public class RecommendResult {
                 "result=" + result +
                 ", car=" + car +
                 '}';
+    }
+
+    private Rank computeRank(int result) {
+        return Rank.of(result);
     }
 }
