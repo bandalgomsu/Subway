@@ -37,7 +37,7 @@ public class StationService {
 
         UpDown upDown = start.computeUpDown(end);
         Time time = new Time(recommendDTO.getHour(), recommendDTO.getMinute());
-
+        
         Rates rates = getRates(getRoute(start, end, upDown), time);
 
         return webClientService.getSeats(rates, time, upDown);

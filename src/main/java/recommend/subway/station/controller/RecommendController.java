@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import recommend.subway.station.domain.Seats;
+import recommend.subway.station.domain.seat.Seats;
 import recommend.subway.station.dto.RecommendDTO;
 import recommend.subway.station.service.StationService;
 
