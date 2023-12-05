@@ -1,4 +1,4 @@
-package recommend.subway.station.dto;
+package recommend.subway.recommend.dto;
 
 import lombok.Getter;
 

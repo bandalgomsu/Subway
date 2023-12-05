@@ -7,9 +7,9 @@ import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Configuration;
 import recommend.subway.infra.batch.dto.RateDTO;
-import recommend.subway.station.domain.station.Station;
-import recommend.subway.station.repository.RateRepository;
-import recommend.subway.station.repository.StationRepository;
+import recommend.subway.recommend.domain.station.Station;
+import recommend.subway.recommend.repository.RateRepository;
+import recommend.subway.recommend.repository.StationRepository;
 
 @RequiredArgsConstructor
 @Configuration

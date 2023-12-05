@@ -1,4 +1,4 @@
-package recommend.subway.station.domain.station;
+package recommend.subway.recommend.domain.station;
 
 import java.util.List;
 import lombok.Getter;

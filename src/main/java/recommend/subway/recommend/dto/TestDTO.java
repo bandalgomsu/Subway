@@ -1,7 +1,7 @@
-package recommend.subway.station.dto;
+package recommend.subway.recommend.dto;
 
 import lombok.Getter;
-import recommend.subway.station.domain.station.UpDown;
+import recommend.subway.recommend.domain.station.UpDown;
 
 @Getter
 public class TestDTO {

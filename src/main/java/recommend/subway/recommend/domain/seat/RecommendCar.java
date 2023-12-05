@@ -1,4 +1,4 @@
-package recommend.subway.station.domain.seat;
+package recommend.subway.recommend.domain.seat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

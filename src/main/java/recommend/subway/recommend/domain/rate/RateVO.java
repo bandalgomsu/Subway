@@ -1,8 +1,8 @@
-package recommend.subway.station.domain.rate;
+package recommend.subway.recommend.domain.rate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import recommend.subway.station.domain.station.Station;
+import recommend.subway.recommend.domain.station.Station;
 
 @AllArgsConstructor
 @Getter

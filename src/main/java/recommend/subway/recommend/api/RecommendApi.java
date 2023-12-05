@@ -1,4 +1,4 @@
-package recommend.subway.station.controller;
+package recommend.subway.recommend.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,33 +7,33 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import recommend.subway.station.domain.rate.Rate;
-import recommend.subway.station.domain.seat.Seats;
-import recommend.subway.station.domain.station.Time;
-import recommend.subway.station.dto.RecommendDTO;
-import recommend.subway.station.repository.RateRepository;
-import recommend.subway.station.repository.StationRepository;
-import recommend.subway.station.service.StationService;
+import recommend.subway.recommend.domain.rate.Rate;
+import recommend.subway.recommend.domain.seat.Seats;
+import recommend.subway.recommend.domain.station.Time;
+import recommend.subway.recommend.dto.RecommendDTO;
+import recommend.subway.recommend.repository.RateRepository;
+import recommend.subway.recommend.repository.StationRepository;
+import recommend.subway.recommend.service.RecommendService;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin(allowedHeaders = "**")
-public class RecommendController {
+public class RecommendApi {
 
-    private final StationService stationService;
+    private final RecommendService recommendService;
     private final RateRepository rateRepository;
     private final StationRepository stationRepository;
 
     @GetMapping("/recommend")
     public ResponseEntity<Seats> recommendSeat(RecommendDTO recommendDTO) {
-        return ResponseEntity.ok(stationService.recommendSeats(recommendDTO));
+        return ResponseEntity.ok(recommendService.recommendSeats(recommendDTO));
     }
 
     @GetMapping("/test")
     public ResponseEntity<Seats> recommendSeatByGetOff(RecommendDTO recommendDTO) {
-        return ResponseEntity.ok(stationService.recommendSeatsByGetOff(recommendDTO));
+        return ResponseEntity.ok(recommendService.recommendSeatsByGetOff(recommendDTO));
     }
 
     @GetMapping("/test2")

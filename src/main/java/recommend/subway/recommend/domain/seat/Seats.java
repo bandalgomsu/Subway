@@ -1,4 +1,4 @@
-package recommend.subway.station.domain.seat;
+package recommend.subway.recommend.domain.seat;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Seats1 {
+public class Seats {
     private final List<Seat> seats;
 
     @Override

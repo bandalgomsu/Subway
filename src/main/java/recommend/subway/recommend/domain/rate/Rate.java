@@ -1,4 +1,4 @@
-package recommend.subway.station.domain.rate;
+package recommend.subway.recommend.domain.rate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import recommend.subway.station.domain.station.Station;
+import recommend.subway.recommend.domain.station.Station;
 
 @Entity
 @AllArgsConstructor

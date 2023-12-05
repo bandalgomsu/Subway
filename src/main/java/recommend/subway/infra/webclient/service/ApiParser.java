@@ -5,8 +5,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-import recommend.subway.station.domain.station.Time;
-import recommend.subway.station.domain.station.UpDown;
+import recommend.subway.recommend.domain.station.Time;
+import recommend.subway.recommend.domain.station.UpDown;
 
 @Service
 public class ApiParser {
