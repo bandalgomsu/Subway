@@ -18,4 +18,15 @@ public class RecommendDTO {
         this.end = end;
         this.subwayLine = subwayLine;
     }
+
+    @Override
+    public String toString() {
+        return "RecommendDTO{" +
+                "hour='" + hour + '\'' +
+                ", minute='" + minute + '\'' +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
+                ", subwayLine='" + subwayLine + '\'' +
+                '}';
+    }
 }

@@ -10,4 +10,11 @@ public class Stations {
     public Stations(List<Station> stations) {
         this.stations = stations;
     }
+
+    @Override
+    public String toString() {
+        return "Stations{" +
+                "stations=" + stations +
+                '}';
+    }
 }

@@ -25,19 +25,18 @@ public class RateWriter implements ItemWriter<RateDTO> {
                     try {
                         Station station = stationRepository.findByNameAndSubwayLine(
                                 validationName(item.getStationName()), item.getSubwayLine());
+                        if(station==null){
+                            log.info("item = {} {} ", validationName(item.getStationName()), item.getSubwayLine());
+                        }
                         getInOutRateRepository.saveAll(item.toEntity(station));
                     } catch (Exception e) {
-                        log.info("item = {} {} ", item.getStationName(), item.getSubwayLine());
+
                     }
                 }
         );
     }
 
     private String validationName(String name) {
-        if (name.contains("역")) {
-            return name;
-        }
-
         if (name.contains("(")) {
             String[] split = name.split("\\(", -1);
             return Arrays.stream(split).findFirst().get() + "역";

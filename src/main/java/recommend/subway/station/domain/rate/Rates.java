@@ -9,13 +9,21 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @Slf4j
 public class Rates {
-    private final List<Rate> rates;
+    private final List<RateVO> rates;
 
-    public Rates(List<Rate> rates) {
+    public Rates(List<RateVO> rates) {
         this.rates = sortTop3Reverse(rates);
     }
 
-    private List<Rate> sortTop3Reverse(List<Rate> rates) {
+    private List<RateVO> sortTop3Reverse(List<RateVO> rates) {
+        log.info("sort = {}",rates);
         return rates.stream().sorted((a, b) -> b.getRate() - a.getRate()).limit(3).toList();
+    }
+
+    @Override
+    public String toString() {
+        return "Rates{" +
+                "rates=" + rates +
+                '}';
     }
 }

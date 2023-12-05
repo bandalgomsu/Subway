@@ -10,4 +10,11 @@ public class RateVO {
     private final int rate;
     private final Station station;
 
+    @Override
+    public String toString() {
+        return "RateVO{" +
+                "rate=" + rate +
+                ", station=" + station +
+                '}';
+    }
 }

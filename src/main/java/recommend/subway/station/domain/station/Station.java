@@ -33,4 +33,14 @@ public class Station {
 
         return UpDown.DOWN;
     }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", subwayLine='" + subwayLine + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }

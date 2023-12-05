@@ -55,7 +55,7 @@ public class WebClientService {
 
     public Seats getSeats(Rates rates, Time time, UpDown upDown) {
         List<Seat> seats = new ArrayList<>();
-
+        log.info("rate = {}",rates.toString());
         rates.getRates().forEach(
                 rate -> seats.add(callApi(rate.getStation(), time, upDown))
         );
@@ -86,12 +86,6 @@ public class WebClientService {
         return new Seat(combineParseResult(congestion, getOff, time, upDown), station.getName());
     }
 
-    private Seat callApi1(Station station, Time time, UpDown upDown) {
-        String congestion = callCongestionApi(station, time).block();
-        String getOff = callGetOffApi(station, time).block();
-
-        return new Seat(combineParseResult1(congestion, getOff, time, upDown), station.getName());
-    }
 
     private List<Integer> combineParseResult(String congestionData, String getOffData, Time time, UpDown upDown) {
         List<Integer> congestion = apiParser.parseCongestion(congestionData, time, upDown);
