@@ -3,6 +3,7 @@ package recommend.subway.station.service;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import recommend.subway.infra.webclient.service.WebClientService;
 import recommend.subway.station.domain.rate.Rate;
 import recommend.subway.station.domain.rate.RateVO;
 import recommend.subway.station.domain.rate.Rates;
-import recommend.subway.station.domain.rate.Rates1;
 import recommend.subway.station.domain.seat.Seat;
 import recommend.subway.station.domain.seat.Seats;
 import recommend.subway.station.domain.station.Station;
@@ -36,6 +36,9 @@ public class StationService {
                 recommendDTO.getSubwayLine());
         Station end = stationRepository.findByNameAndSubwayLine(recommendDTO.getEnd(),
                 recommendDTO.getSubwayLine());
+
+        log.info("start = {}",start.toString());
+        log.info("end = {}",end.toString());
 
         UpDown upDown = start.computeUpDown(end);
 
@@ -82,24 +85,20 @@ public class StationService {
         return new Stations(stationRepository.findAllByIdBetween(start.getId(), end.getId()));
     }
 
+
     private Rates getRates(Stations stations, Time time) {
-        List<Rate> rates = new ArrayList<>();
-
-        stations.getStations().forEach(station ->
-                rates.add(rateRepository.findByHourAndStation(time.getHour(), station))
-        );
-
-        return new Rates(rates);
-    }
-
-    private Rates1 getRates1(Stations stations, Time time) {
         List<RateVO> rates = new ArrayList<>();
 
         stations.getStations().forEach(station ->
-                rateRepository.findByHourAndStationAndMonth(time.getHour(), station, time.getMonth())
+            rates.add(
+                    new RateVO(rateRepository.findByHourAndStation(time.getHour(), station)
+                            .stream()
+                            .filter(i -> i.getMonth().substring(4, 6).equals(time.getMonth()))
+                            .collect(Collectors.averagingInt(Rate::getRate)).intValue()
+                            ,station))
         );
 
-        return new Rates1(rates);
+        return new Rates(rates);
     }
 
     private RateVO computeRate(List<Rate> rate, Time time, Station station) {
