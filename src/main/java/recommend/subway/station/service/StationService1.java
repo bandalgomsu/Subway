@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import recommend.subway.infra.webclient.service.WebClientService;
+import recommend.subway.infra.webclient.service.WebClientService1;
 import recommend.subway.station.domain.rate.Rate;
 import recommend.subway.station.domain.rate.RateVO;
 import recommend.subway.station.domain.rate.Rates;
@@ -26,10 +27,12 @@ import recommend.subway.station.repository.StationRepository;
 @Service
 @Slf4j
 @Transactional
-public class StationService {
+public class StationService1 {
     private final RateRepository rateRepository;
     private final StationRepository stationRepository;
-    private final WebClientService webClientService;
+
+    @Autowired
+    private final WebClientService1 webClientService;
 
     public Seats recommendSeats(RecommendDTO recommendDTO) {
         Station start = stationRepository.findByNameAndSubwayLine(recommendDTO.getStart(),
@@ -41,7 +44,7 @@ public class StationService {
 
         Time time = new Time(recommendDTO.getHour(), recommendDTO.getMinute());
 
-        Rates rates = getRates(getRoute(start, end, upDown), time);
+        Rates1 rates = getRates1(getRoute(start, end, upDown), time);
 
         Seats seats = webClientService.getSeats(rates, time, upDown);
 

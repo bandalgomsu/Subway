@@ -23,13 +23,12 @@ public class Rate {
     @GeneratedValue
     @Column(name = "rate_Id")
     private Long id;
-
     private int rate;
-
     private String hour;
     private String month;
 
     @ManyToOne
     @JoinColumn(name = "station_Id")
     private Station station;
+    
 }

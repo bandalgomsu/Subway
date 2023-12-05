@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import recommend.subway.station.domain.seat.Seats;
+import recommend.subway.station.domain.station.Time;
 import recommend.subway.station.dto.RecommendDTO;
 import recommend.subway.station.service.StationService;
 
@@ -15,7 +16,7 @@ import recommend.subway.station.service.StationService;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(allowedHeaders = "**")
 public class RecommendController {
 
     private final StationService stationService;
@@ -28,5 +29,11 @@ public class RecommendController {
     @GetMapping("/test")
     public ResponseEntity<Seats> recommendSeatByGetOff(RecommendDTO recommendDTO) {
         return ResponseEntity.ok(stationService.recommendSeatsByGetOff(recommendDTO));
+    }
+
+    @GetMapping("/test2")
+    public void a() {
+        Time time = new Time();
+        log.info(time.toString());
     }
 }

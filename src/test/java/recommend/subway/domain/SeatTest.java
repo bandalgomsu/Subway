@@ -14,7 +14,7 @@ public class SeatTest {
     void createSeat() {
         Seat seat = new Seat(List.of(10, 20, 30, 40, 50, 60, 70, 80, 90, 100), "서울역");
 
-        Assertions.assertEquals(10, seat.getResults().get(0).getResult());
+        Assertions.assertEquals(10, seat.getTotalCars().get(0).getCar());
         Assertions.assertEquals(Rank.LOW, seat.getTotalCars().get(0).getRank());
     }
 }

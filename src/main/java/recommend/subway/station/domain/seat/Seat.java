@@ -37,4 +37,13 @@ public class Seat {
                 .limit(3)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "name='" + name + '\'' +
+                ", recommendCars=" + recommendCars +
+                ", totalCars=" + totalCars +
+                '}';
+    }
 }

@@ -15,4 +15,12 @@ public class TotalCar {
     private Rank computeRank(int value) {
         return Rank.of(value);
     }
+
+    @Override
+    public String toString() {
+        return "TotalCar{" +
+                "car=" + car +
+                ", rank=" + rank +
+                '}';
+    }
 }
