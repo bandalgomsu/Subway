@@ -3,6 +3,9 @@ package recommend.subway.recommend.domain.seat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import recommend.subway.recommend.repository.StatisticsRepository;
 
 @Getter
 @AllArgsConstructor
@@ -11,7 +14,6 @@ public class RecommendCar {
     private final int result;
     private final int car;
     private final Rank rank;
-
 
     @Override
     public String toString() {

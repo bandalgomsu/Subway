@@ -2,6 +2,7 @@ package recommend.subway.infra.webclient.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import recommend.subway.recommend.domain.station.Time;
 import recommend.subway.recommend.domain.station.UpDown;
 
 @Service
+@Slf4j
 public class ApiParser {
 
     public List<Integer> parseGetOff(String getOff, Time time, UpDown upDown) {
@@ -48,6 +50,7 @@ public class ApiParser {
             resultList.add(resultInt);
         }
 
+        log.info("bb = {}",resultList);
         return resultList;
     }
 
@@ -56,6 +59,7 @@ public class ApiParser {
         JSONObject contents = congestionJson.getJSONObject("contents");
         JSONArray stat = contents.getJSONArray("stat");
         List<Integer> resultList = new ArrayList<>();
+        log.info("time = {} {} {} {}",time.getHour(),time.getMinute(),time.getMonth(),upDown.getUpDown());
         int[] result = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         boolean f;
         int count = 0;
@@ -88,11 +92,11 @@ public class ApiParser {
             if (result[i] == 0) {
                 break;
             }
-
             result[i] /= count;
             int resultInt = result[i];
             resultList.add(resultInt);
         }
+
         return resultList;
     }
 }

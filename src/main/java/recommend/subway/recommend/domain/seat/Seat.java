@@ -1,11 +1,16 @@
 package recommend.subway.recommend.domain.seat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import recommend.subway.recommend.repository.StatisticsRepository;
 
 @Getter
 @Slf4j
@@ -13,8 +18,9 @@ public class Seat {
     private final String name;
     private final List<RecommendCar> recommendCars;
     private final List<TotalCar> totalCars;
-
-    public Seat(List<Integer> rates, String name) {
+    private final List<Integer> congestions;
+    public Seat(List<Integer> rates, String name,List<Integer> congestions) {
+        this.congestions = congestions;
         totalCars = createTotalCars(rates);
         this.recommendCars = sortTop3Reverse(rates);
         this.name = name;
@@ -33,17 +39,22 @@ public class Seat {
                         .thenComparingInt(RecommendCar::getCar))
                 .toList();
 
-        return indexedValues.stream()
+        ArrayList<RecommendCar> recommend = new ArrayList<>(indexedValues.stream()
                 .limit(3)
-                .collect(Collectors.toList());
+                .toList());
+//        List<Integer> cars = new ArrayList<>();
+//        recommend.forEach(recommendCar -> cars.add(recommendCar.getCar()));
+//
+//        for(int i = 0 ; i<congestions.size(); i++) {
+//            if (!cars.contains(i+1)&& congestions.get(i) <= 34) {
+//                recommend.add(new RecommendCar(congestions.get(i), i + 1));
+//            }
+//        }
+        return recommend;
     }
 
     @Override
     public String toString() {
-        return "Seat{" +
-                "name='" + name + '\'' +
-                ", recommendCars=" + recommendCars +
-                ", totalCars=" + totalCars +
-                '}';
+        return name + " " + recommendCars.toString() + " " + totalCars.toString();
     }
 }

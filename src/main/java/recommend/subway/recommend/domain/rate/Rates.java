@@ -13,11 +13,13 @@ public class Rates {
 
     public Rates(List<RateVO> rates) {
         this.rates = sortTop3Reverse(rates);
+        rates.forEach(i -> log.info("rate {}",i.toString()));
+        log.info("rates = {}",this.rates);
     }
 
     private List<RateVO> sortTop3Reverse(List<RateVO> rates) {
-        log.info("sort = {}",rates);
-        return rates.stream().sorted((a, b) -> b.getRate() - a.getRate()).limit(3).toList();
+        Size size = new Size(rates.size() * 2);
+        return rates.stream().sorted((a, b) -> b.getRate() - a.getRate()).limit(size.getSize()).toList();
     }
 
     @Override
