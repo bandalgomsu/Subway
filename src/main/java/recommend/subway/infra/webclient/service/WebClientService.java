@@ -34,14 +34,17 @@ public class WebClientService {
                 rate -> seats.add(callApi(rate.getStation(), time, upDown))
         );
 
+        log.info("seats = {}",seats);
         return new Seats(seats);
     }
 
     private Seat callApi(Station station, Time time, UpDown upDown) {
         String congestion = callCongestionApi(station, time).block();
         String getOff = callGetOffApi(station, time).block();
+        Result result = combineParseResult(congestion, getOff, time, upDown);
 
-        return new Seat(combineParseResult(congestion, getOff, time, upDown), station.getName());
+        log.info("b = {} {}",congestion,getOff);
+        return new Seat(result.getResult(), station.getName(),result.getCongestions());
     }
 
     private Mono<String> callGetOffApi(Station station, Time time) {
@@ -70,26 +73,15 @@ public class WebClientService {
                 .bodyToMono(String.class);
     }
 
-    private List<Integer> combineParseResult(String congestionData, String getOffData, Time time, UpDown upDown) {
+    private Result combineParseResult(String congestionData, String getOffData, Time time, UpDown upDown) {
         List<Integer> congestion = apiParser.parseCongestion(congestionData, time, upDown);
         List<Integer> getOff = apiParser.parseGetOff(getOffData, time, upDown);
-
-        return IntStream.range(0, getOff.size())
+        log.info("a = {} {}",congestion,getOff);
+        return new Result(IntStream.range(0, getOff.size())
                 .mapToObj(i -> congestion.get(i) - ((congestion.get(i) * getOff.get(i)) / 100))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()),getOff);
     }
 
-    public Seats getSeatsByGetOff(Rates rates, Time time, UpDown upDown) {
-        List<Seat> seats = new ArrayList<>();
-
-        rates.getRates().forEach(
-                rate -> seats.add(new Seat(apiParser
-                        .parseGetOff(callGetOffApi(rate.getStation(), time).block(), time, upDown),
-                        rate.getStation().getName()))
-        );
-
-        return new Seats(seats);
-    }
 
     public Seat testGetSeats(Station station, Time time, UpDown upDown) {
         return callApi(station, time, upDown);

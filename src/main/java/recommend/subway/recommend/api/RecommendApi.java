@@ -28,12 +28,9 @@ public class RecommendApi {
 
     @GetMapping("/recommend")
     public ResponseEntity<Seats> recommendSeat(RecommendDTO recommendDTO) {
+        Seats seats = recommendService.recommendSeats(recommendDTO);
+        log.info("");
         return ResponseEntity.ok(recommendService.recommendSeats(recommendDTO));
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<Seats> recommendSeatByGetOff(RecommendDTO recommendDTO) {
-        return ResponseEntity.ok(recommendService.recommendSeatsByGetOff(recommendDTO));
     }
 
     @GetMapping("/test2")

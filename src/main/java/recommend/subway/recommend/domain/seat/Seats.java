@@ -8,11 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Seats {
     private final List<Seat> seats;
-
     @Override
     public String toString() {
-        return "Seats{" +
-                "seats=" + seats +
-                '}';
+        return seats.toString();
     }
+
+
 }

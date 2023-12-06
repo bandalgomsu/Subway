@@ -1,11 +1,15 @@
 package recommend.subway.recommend.domain.seat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import recommend.subway.recommend.repository.StatisticsRepository;
 
 @Getter
 @Slf4j
@@ -13,11 +17,13 @@ public class Seat {
     private final String name;
     private final List<RecommendCar> recommendCars;
     private final List<TotalCar> totalCars;
-
-    public Seat(List<Integer> rates, String name) {
+    @JsonIgnore
+    private final List<Integer> contestions;
+    public Seat(List<Integer> rates, String name,List<Integer> congestions) {
         totalCars = createTotalCars(rates);
         this.recommendCars = sortTop3Reverse(rates);
         this.name = name;
+        this.contestions = congestions;
     }
 
     private List<TotalCar> createTotalCars(List<Integer> results) {
@@ -40,10 +46,6 @@ public class Seat {
 
     @Override
     public String toString() {
-        return "Seat{" +
-                "name='" + name + '\'' +
-                ", recommendCars=" + recommendCars +
-                ", totalCars=" + totalCars +
-                '}';
+        return name + " " + recommendCars.toString() + " " + totalCars.toString();
     }
 }
