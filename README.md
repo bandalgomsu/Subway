@@ -33,8 +33,7 @@ https://github.com/abichan99/soApplied2
 ### 💯 어플리케이션 화면
 
 ---
-
-![Untitled.png](..%2F..%2F..%2FDownloads%2FUntitled.png)
+![Untitled](https://github.com/bandalgomsu/Subway/assets/121839239/afbb7f94-6da3-4ba2-aa13-30e93a41e262)
 
 ### 👻 주요 기능
 
