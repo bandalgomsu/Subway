@@ -7,9 +7,9 @@ import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Configuration;
 import recommend.subway.infra.batch.dto.RateDTO;
-import recommend.subway.station.domain.station.Station;
-import recommend.subway.station.repository.RateRepository;
-import recommend.subway.station.repository.StationRepository;
+import recommend.subway.recommend.domain.station.Station;
+import recommend.subway.recommend.repository.RateRepository;
+import recommend.subway.recommend.repository.StationRepository;
 
 @RequiredArgsConstructor
 @Configuration
@@ -25,19 +25,18 @@ public class RateWriter implements ItemWriter<RateDTO> {
                     try {
                         Station station = stationRepository.findByNameAndSubwayLine(
                                 validationName(item.getStationName()), item.getSubwayLine());
+                        if(station==null){
+                            log.info("item = {} {} ", validationName(item.getStationName()), item.getSubwayLine());
+                        }
                         getInOutRateRepository.saveAll(item.toEntity(station));
                     } catch (Exception e) {
-                        log.info("item = {} {} ", item.getStationName(), item.getSubwayLine());
+
                     }
                 }
         );
     }
 
     private String validationName(String name) {
-        if (name.contains("역")) {
-            return name;
-        }
-
         if (name.contains("(")) {
             String[] split = name.split("\\(", -1);
             return Arrays.stream(split).findFirst().get() + "역";

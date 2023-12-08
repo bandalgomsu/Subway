@@ -2,7 +2,7 @@ package recommend.subway.infra.batch.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import recommend.subway.station.domain.station.Station;
+import recommend.subway.recommend.domain.station.Station;
 
 @Builder
 @AllArgsConstructor
