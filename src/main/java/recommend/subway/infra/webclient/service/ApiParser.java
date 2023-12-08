@@ -79,6 +79,7 @@ public class ApiParser {
                                 break;
                             }
                             result[k] += getOffCarRate.getInt(k);
+                            log.info("rererer {}",result[k]);
                         }
                         if (f) {
                             count += 1;
@@ -94,6 +95,7 @@ public class ApiParser {
             }
             result[i] /= count;
             int resultInt = result[i];
+            log.info("a {}",resultInt);
             resultList.add(resultInt);
         }
 
