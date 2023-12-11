@@ -1,9 +1,8 @@
-package recommend.subway.recommend.domain.staics;
+package recommend.subway.recommend.domain.statistics;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 

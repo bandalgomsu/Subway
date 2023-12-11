@@ -26,7 +26,6 @@ public class Station {
     private String code;
 
     public UpDown computeUpDown(Station end) {
-        log.info("upDown = {}", end.getId() - id);
         if (end.getId() - id > 0) {
             return UpDown.UP;
         }

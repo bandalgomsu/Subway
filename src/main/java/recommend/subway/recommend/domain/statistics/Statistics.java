@@ -1,11 +1,10 @@
-package recommend.subway.recommend.domain.staics;
+package recommend.subway.recommend.domain.statistics;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import recommend.subway.recommend.domain.seat.Rank;
 
 @Entity
 @AllArgsConstructor

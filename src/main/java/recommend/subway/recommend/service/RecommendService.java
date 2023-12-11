@@ -1,12 +1,9 @@
 package recommend.subway.recommend.service;
 
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +13,8 @@ import recommend.subway.recommend.domain.rate.Rate;
 import recommend.subway.recommend.domain.rate.RateVO;
 import recommend.subway.recommend.domain.rate.Rates;
 import recommend.subway.recommend.domain.seat.Seats;
-import recommend.subway.recommend.domain.staics.CongestionStatistics;
-import recommend.subway.recommend.domain.staics.Statistics;
+import recommend.subway.recommend.domain.statistics.CongestionStatistics;
+import recommend.subway.recommend.domain.statistics.Statistics;
 import recommend.subway.recommend.domain.station.Station;
 import recommend.subway.recommend.domain.station.Stations;
 import recommend.subway.recommend.domain.station.Time;
@@ -50,7 +47,7 @@ public class RecommendService {
 
         UpDown upDown = start.computeUpDown(end);
 
-        Time time = new Time();
+        Time time = getTime(recommendDTO);
 
         Rates rates = getRates(getRoute(start, end, upDown), time);
 
@@ -61,7 +58,13 @@ public class RecommendService {
         return seats;
     }
 
+    private Time getTime(RecommendDTO recommendDTO){
+        if(recommendDTO.getHour().isBlank()){
+            return new Time();
+        }
 
+        return new Time(recommendDTO.getHour(),recommendDTO.getMinute());
+    }
 
     private Stations getRoute(Station start, Station end, UpDown upDown) {
         if (upDown.equals(UpDown.DOWN)) {
