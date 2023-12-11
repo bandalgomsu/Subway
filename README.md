@@ -42,3 +42,95 @@ https://github.com/abichan99/soApplied2
 - 사용자에게 호선 , 승차역 , 하차역을 입력받는다.
 - 승차역 ~ 하차역 사이에 역 중 가장 하차율이 큰 역들 n개를 선별한다.
 - 그리고 그 역들 중에서 가장 앉을 확률이 높은 칸을 추천해준다
+### 📖 엔드포인트
+
+---
+
+- /api/recommend
+- Request Param
+    - start : String
+    - end : String
+    - minute : String (nullable)
+    - hour : String (nullable)
+    - subwayLine : String
+  
+- Response Ex
+
+    ```markdown
+    {
+        "seats": [
+            {
+                "name": "종로5가역",
+                "recommendCars": [
+                    {
+                        "car": 10,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 9,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 8,
+                        "rank": "LOW"
+                    }
+                ],
+                "totalCars": [
+                    {
+                        "car": 1,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 2,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 3,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 4,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 5,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 6,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 7,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 8,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 9,
+                        "rank": "LOW"
+                    },
+                    {
+                        "car": 10,
+                        "rank": "LOW"
+                    }
+                ],
+                "congestions": [
+                    10,
+                    14,
+                    13,
+                    13,
+                    9,
+                    9,
+                    10,
+                    8,
+                    7,
+                    4
+                ]
+            }
+    		....
+        ]
+    }
+    ```
